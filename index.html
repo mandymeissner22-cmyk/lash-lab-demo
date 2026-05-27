@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lash Lab — Premium Lash & Brow Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:   #0A0A0A;
+      --dark:    #141410;
+      --dark2:   #1C1B18;
+      --dark3:   #222018;
+      --gold:    #D4AF37;
+      --gold-l:  #E8CD78;
+      --gold-ll: #F0DFA0;
+      --white:   #FFFFFF;
+      --off-w:   #F0EDE6;
+      --mid:     #A09B94;
+      --dim:     #5A5650;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'Montserrat', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--black); color: var(--white); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(212,175,55,0.15);
+      padding: 0 60px; height: 70px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: baseline; gap: 12px; }
+    .nav-logo-text { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; letter-spacing: 0.1em; }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-logo-sub { font-size: 0.62rem; font-weight: 300; letter-spacing: 0.18em; color: var(--mid); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { padding: 10px 28px; background: var(--gold); color: var(--black); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background .2s, transform .2s; }
+    .nav-cta:hover { background: var(--gold-l); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 120px 60px 80px;
+      text-align: center;
+    }
+    .hero-glow {
+      position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .hero-line { width: 180px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 28px; }
+    .hero-eyebrow { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+    .hero-title { font-family: var(--serif); font-size: clamp(4rem, 10vw, 9rem); font-weight: 700; line-height: 0.95; letter-spacing: 0.05em; margin-bottom: 32px; }
+    .hero-title .gold { color: var(--gold); }
+    .hero-divider { width: 240px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 28px; }
+    .hero-sub { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--gold-l); margin-bottom: 16px; }
+    .hero-services { font-size: 0.72rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); margin-bottom: 52px; }
+    .hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold { padding: 16px 44px; background: var(--gold); color: var(--black); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all .25s; }
+    .btn-gold:hover { background: var(--gold-l); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(212,175,55,0.2); }
+    .btn-outline { padding: 15px 44px; border: 1px solid var(--gold); color: var(--gold); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all .25s; }
+    .btn-outline:hover { background: rgba(212,175,55,0.08); transform: translateY(-2px); }
+    .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 0.65rem; font-weight: 300; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .hero-scroll::before { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, var(--gold)); display: block; }
+
+    /* ── TICKER ── */
+    .ticker { background: var(--dark); border-top: 1px solid rgba(212,175,55,0.15); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 14px 0; overflow: hidden; }
+    .ticker-inner { display: flex; gap: 60px; white-space: nowrap; animation: ticker 18s linear infinite; }
+    .ticker-inner span { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+    .ticker-dot { color: var(--dim) !important; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 60px; }
+    .sec-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .sec-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
+    .sec-title .gold { color: var(--gold); }
+    .gold-rule { width: 60px; height: 1px; background: var(--gold); margin-bottom: 32px; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--dark2); }
+    .services-head { text-align: center; margin-bottom: 64px; }
+    .services-head .gold-rule { margin: 0 auto 32px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .svc-card { background: var(--dark3); padding: 48px 40px; position: relative; overflow: hidden; transition: background .3s; }
+    .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .svc-card:hover { background: #26231A; }
+    .svc-num { font-family: var(--serif); font-size: 3.5rem; font-weight: 700; color: rgba(212,175,55,0.12); line-height: 1; margin-bottom: 20px; }
+    .svc-name { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
+    .svc-desc { font-size: 0.82rem; font-weight: 300; color: var(--mid); line-height: 1.8; margin-bottom: 24px; }
+    .svc-price { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; color: var(--gold); }
+    .svc-duration { font-size: 0.68rem; font-weight: 300; color: var(--dim); margin-top: 4px; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--black); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-img { aspect-ratio: 3/4; background: var(--dark2); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(212,175,55,0.1); position: relative; overflow: hidden; }
+    .about-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(212,175,55,0.04) 0%, transparent 60%); }
+    .about-img-placeholder { font-family: var(--serif); font-size: 1rem; color: var(--dim); letter-spacing: 0.1em; }
+    .about-text .sec-title { font-size: 2.4rem; }
+    .about-text p { font-size: 0.88rem; font-weight: 300; color: var(--mid); line-height: 1.9; margin-bottom: 20px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+    .stat { border-left: 1px solid rgba(212,175,55,0.3); padding-left: 20px; }
+    .stat-num { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.7rem; font-weight: 300; color: var(--dim); letter-spacing: 0.08em; margin-top: 4px; }
+
+    /* ── GALLERY ── */
+    .gallery { background: var(--dark2); }
+    .gallery-head { text-align: center; margin-bottom: 48px; }
+    .gallery-head .gold-rule { margin: 0 auto; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; }
+    .gallery-item { aspect-ratio: 3/4; background: var(--dark3); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(212,175,55,0.06); position: relative; overflow: hidden; cursor: pointer; transition: all .3s; }
+    .gallery-item:hover { border-color: rgba(212,175,55,0.25); }
+    .gallery-item::after { content: 'Foto hinzufügen'; font-size: 0.65rem; font-weight: 300; letter-spacing: 0.1em; color: var(--dim); }
+    .gallery-item:first-child { grid-row: span 2; aspect-ratio: unset; }
+    .gallery-note { text-align: center; margin-top: 24px; font-size: 0.72rem; color: var(--dim); font-weight: 300; letter-spacing: 0.05em; }
+
+    /* ── PROCESS ── */
+    .process { background: var(--black); }
+    .process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; margin-top: 56px; }
+    .process-step { position: relative; }
+    .process-step::after { content: '→'; position: absolute; right: -24px; top: 8px; color: rgba(212,175,55,0.3); font-size: 1.2rem; }
+    .process-step:last-child::after { display: none; }
+    .step-num { width: 40px; height: 40px; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 1rem; color: var(--gold); margin-bottom: 20px; }
+    .step-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+    .step-desc { font-size: 0.8rem; font-weight: 300; color: var(--mid); line-height: 1.75; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--dark); text-align: center; position: relative; overflow: hidden; padding: 120px 60px; }
+    .cta-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+    .cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
+    .cta-sub { font-size: 0.88rem; font-weight: 300; color: var(--mid); line-height: 1.8; margin-bottom: 48px; }
+    .cta-contacts { display: flex; justify-content: center; gap: 40px; margin-top: 32px; flex-wrap: wrap; }
+    .cta-contact { font-size: 0.72rem; font-weight: 300; letter-spacing: 0.1em; color: var(--dim); }
+    .cta-contact a { color: var(--dim); text-decoration: none; transition: color .2s; }
+    .cta-contact a:hover { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer { background: #070706; border-top: 1px solid rgba(212,175,55,0.1); padding: 36px 60px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.1em; }
+    .footer-logo span { color: var(--gold); }
+    .footer-note { font-size: 0.68rem; font-weight: 300; color: var(--dim); letter-spacing: 0.06em; }
+    .footer-tag { font-size: 0.65rem; font-weight: 300; color: rgba(212,175,55,0.35); letter-spacing: 0.08em; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 28px; }
+      .services-grid { grid-template-columns: 1fr; gap: 2px; }
+      .about { grid-template-columns: 1fr; gap: 40px; }
+      .about-img { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item:first-child { grid-row: span 1; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .process-step::after { display: none; }
+      footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div>
+      <div class="nav-logo-text">LASH <span>LAB</span></div>
+      <div class="nav-logo-sub">Lash & Brow Studio</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#leistungen">Leistungen</a>
+    <a href="#about">Über mich</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="#kontakt" class="nav-cta">Termin buchen</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow">Premium Lash & Brow Studio</p>
+  <h1 class="hero-title">LASH<br><span class="gold">LAB</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Schönheit im Detail.</p>
+  <p class="hero-services">Classic &nbsp;·&nbsp; Volume &nbsp;·&nbsp; Hybrid &nbsp;·&nbsp; Brow Styling</p>
+  <div class="hero-btns">
+    <a href="#kontakt" class="btn-gold">Termin buchen</a>
+    <a href="#leistungen" class="btn-outline">Leistungen</a>
+  </div>
+  <div class="hero-scroll">Entdecken</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>LASH LAB</span><span class="ticker-dot">✦</span>
+    <span>CLASSIC LASHES</span><span class="ticker-dot">✦</span>
+    <span>VOLUME LASHES</span><span class="ticker-dot">✦</span>
+    <span>HYBRID LASHES</span><span class="ticker-dot">✦</span>
+    <span>BROW STYLING</span><span class="ticker-dot">✦</span>
+    <span>PREMIUM STUDIO</span><span class="ticker-dot">✦</span>
+    <span>LASH LAB</span><span class="ticker-dot">✦</span>
+    <span>CLASSIC LASHES</span><span class="ticker-dot">✦</span>
+    <span>VOLUME LASHES</span><span class="ticker-dot">✦</span>
+    <span>HYBRID LASHES</span><span class="ticker-dot">✦</span>
+    <span>BROW STYLING</span><span class="ticker-dot">✦</span>
+    <span>PREMIUM STUDIO</span><span class="ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="leistungen">
+  <div class="services-head">
+    <p class="sec-label">Unsere Leistungen</p>
+    <h2 class="sec-title">Was wir für dich <span class="gold">tun.</span></h2>
+    <div class="gold-rule"></div>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <h3 class="svc-name">Classic Lashes</h3>
+      <p class="svc-desc">Das natürliche, elegante Ergebnis. Ein einzelnes Wimpernhaar wird pro Naturwimper aufgetragen — für einen definierten, gepflegten Look.</p>
+      <p class="svc-price">Ab 89 €</p>
+      <p class="svc-duration">ca. 90 Minuten</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <h3 class="svc-name">Volume Lashes</h3>
+      <p class="svc-desc">Mehr Volumen, mehr Dramatik. Mehrere ultrafeine Fäden werden zu einem Fächer zusammengefasst — für einen glamourösen, dichten Look.</p>
+      <p class="svc-price">Ab 110 €</p>
+      <p class="svc-duration">ca. 120 Minuten</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <h3 class="svc-name">Brow Styling</h3>
+      <p class="svc-desc">Perfekte Brauen, die dein Gesicht rahmen. Professionelles Färben, Zupfen und Formen für einen cleanen, polished Look.</p>
+      <p class="svc-price">Ab 45 €</p>
+      <p class="svc-duration">ca. 45 Minuten</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img">
+    <span class="about-img-placeholder">[ Dein Foto ]</span>
+  </div>
+  <div class="about-text">
+    <p class="sec-label">Über mich</p>
+    <h2 class="sec-title">Passion trifft<br><span class="gold">Perfektion.</span></h2>
+    <div class="gold-rule"></div>
+    <p>Hallo, ich bin [Name] — zertifizierte Lash & Brow Artist mit einer echten Leidenschaft für Details und Schönheit.</p>
+    <p>Seit [Jahr] verschönere ich die Wimpern und Brauen meiner Kundinnen. Für mich ist jedes Set ein Unikat — individuell angepasst an Augenform, Gesicht und Persönlichkeit.</p>
+    <p>Mein Studio ist dein sicherer Raum — für Entspannung, Vertrauen und ein Ergebnis, das dich strahlen lässt.</p>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Zufriedene Kundinnen</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Jahre Erfahrung</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Zertifiziert & versichert</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Kundenbewertungen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="galerie">
+  <div class="gallery-head">
+    <p class="sec-label">Galerie</p>
+    <h2 class="sec-title">Unsere Arbeit spricht <span class="gold">für sich.</span></h2>
+    <div class="gold-rule"></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+    <div class="gallery-item"></div>
+  </div>
+  <p class="gallery-note">Echte Vorher/Nachher Fotos kommen hier rein — einfach eigene Bilder einfügen.</p>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+  <p class="sec-label">So läuft es ab</p>
+  <h2 class="sec-title">Dein Weg zum <span class="gold">perfekten Look.</span></h2>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Beratung</h3>
+      <p class="step-desc">Wir klären gemeinsam deinen gewünschten Look, Augenform und Pflegeroutine.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Behandlung</h3>
+      <p class="step-desc">Du lehnst dich zurück und entspannst, während ich präzise arbeite.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Ergebnis</h3>
+      <p class="step-desc">Dein neuer Look — maßgeschneidert, natürlich und strahlend.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <h3 class="step-title">Pflege</h3>
+      <p class="step-desc">Du erhältst alle Tipps für optimale Haltbarkeit und Nachsorge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="kontakt">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <p class="sec-label" style="text-align:center">Termin buchen</p>
+    <h2 class="cta-title">Bereit für deinen<br><span class="gold">neuen Look?</span></h2>
+    <p class="cta-sub">Schreib mir eine DM auf Instagram oder eine E-Mail — ich melde mich innerhalb von 24 Stunden und wir finden den perfekten Termin für dich.</p>
+    <div class="hero-btns">
+      <a href="https://instagram.com/lashlab.studio" class="btn-gold" target="_blank">DM auf Instagram</a>
+      <a href="mailto:hallo@lashlab.de" class="btn-outline">E-Mail schreiben</a>
+    </div>
+    <div class="cta-contacts">
+      <span class="cta-contact"><a href="https://instagram.com/lashlab.studio">@lashlab.studio</a></span>
+      <span class="cta-contact">·</span>
+      <span class="cta-contact"><a href="mailto:hallo@lashlab.de">hallo@lashlab.de</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">LASH <span>LAB</span></div>
+  <div class="footer-note">Demo-Projekt &nbsp;·&nbsp; Lash & Brow Studio</div>
+  <div class="footer-tag">erstellt von @matchaundkirschen</div>
+</footer>
+
+</body>
+</html>
